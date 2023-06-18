@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:chamada_univel/recuperar_senha.dart';
+import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 
 import 'menu_principal.dart';
@@ -12,17 +13,19 @@ class AddDisciplina extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Chamada Online'),
-          backgroundColor: Colors.purple,
-        ),
-        backgroundColor: Color.fromARGB(255, 26, 26, 26),
-        body: Login(),
+            title: const Text('Chamada Online'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context, false),
+            )),
+        body: _AddDisciplina(),
       ),
+      theme: style(),
     );
   }
 }
 
-class Login extends StatelessWidget {
+class _AddDisciplina extends StatelessWidget {
   String email = '';
   String pass = '';
   @override
@@ -37,10 +40,7 @@ class Login extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 50, top: 30),
                 child: const Text(
                   'Adicionar Disciplina',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
                 )),
             Container(
               padding: const EdgeInsets.all(10),
@@ -48,17 +48,7 @@ class Login extends StatelessWidget {
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
                   labelText: 'Nome da Disciplina',
-                  filled: true,
-                  fillColor: Colors.white,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  floatingLabelStyle: TextStyle(
-                    backgroundColor: Colors.white,
-                    color: Colors.black,
-                  ),
                 ),
               ),
             ),
@@ -68,12 +58,6 @@ class Login extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
                 child: ElevatedButton(
                   child: const Text('Adicionar'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {

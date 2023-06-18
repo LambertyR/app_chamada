@@ -56,9 +56,9 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextField(
                 obscureText: true,
+                style: TextStyle(),
                 decoration: const InputDecoration(
                   labelText: 'Senha',
-                  filled: true,
                 ),
               ),
             ),

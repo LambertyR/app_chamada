@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import 'view/login.dart';
+import 'login.dart';
 
 class Disciplinas extends StatelessWidget {
   const Disciplinas({super.key});
@@ -63,11 +63,11 @@ Widget disciplinaCard(context, String nomeDisciplina) {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomCenter,
           colors: [
-            Colors.purple,
-            Colors.purpleAccent,
+            Color(0xFFFFB617),
+            Colors.yellowAccent,
           ],
         ),
       ),
@@ -90,7 +90,6 @@ Widget SetaDireita() {
     alignment: Alignment.centerRight,
     child: Icon(
       Icons.arrow_forward_rounded,
-      color: Colors.white,
       size: 50,
     ),
   );
@@ -104,7 +103,9 @@ Widget NomeDiscipina(String nomeDisciplina) {
         Text(
           nomeDisciplina,
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w500, fontSize: 35),
+              color: Colors.indigo[900],
+              fontWeight: FontWeight.w500,
+              fontSize: 35),
         )
       ]));
 }

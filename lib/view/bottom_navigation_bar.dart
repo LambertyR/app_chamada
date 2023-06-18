@@ -2,8 +2,6 @@
 
 import 'package:chamada_univel/view/login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Bottom_Navigation_Bar extends StatefulWidget {
   const Bottom_Navigation_Bar({super.key});
@@ -17,7 +15,6 @@ class _Bottom_Navigation_Bar extends State<Bottom_Navigation_Bar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.purple,
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
@@ -38,8 +35,6 @@ class _Bottom_Navigation_Bar extends State<Bottom_Navigation_Bar> {
           label: "Sair",
         )
       ],
-      unselectedItemColor: Colors.white,
-      selectedItemColor: Colors.white,
     );
   }
 }

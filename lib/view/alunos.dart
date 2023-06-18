@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import 'bottom_navigation_bar.dart';
+import 'view/bottom_navigation_bar.dart';
 import 'menu_principal.dart';
 
 class Alunos extends StatelessWidget {
@@ -13,7 +14,6 @@ class Alunos extends StatelessWidget {
 
   Alunos({
     required this.disciplina,
-    
   });
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,11 @@ class Alunos extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.purple,
           title: const Text("Alunos"),
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: Colors.white,
               onPressed: () => Navigator.pop(context, false)),
         ),
-        backgroundColor: Color.fromARGB(255, 26, 26, 26),
         body: Container(
           child: ListView(
             children: [
@@ -41,11 +38,11 @@ class Alunos extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+                    begin: Alignment.bottomRight,
+                    end: Alignment.bottomCenter,
                     colors: [
-                      Colors.purple,
-                      Colors.purpleAccent,
+                      Color(0xFFFFB617),
+                      Colors.yellowAccent,
                     ],
                   ),
                 ),
@@ -56,15 +53,17 @@ class Alunos extends StatelessWidget {
                     Text(
                       "Disciplina: " + disciplina,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.indigo[900],
                         fontSize: 28,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
                       "Data: " + formattedDate,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.indigo[900],
                         fontSize: 28,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -79,12 +78,6 @@ class Alunos extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 20, bottom: 20),
                     child: ElevatedButton(
                       child: const Text('Salvar'),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple,
-                          textStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          )),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -98,6 +91,7 @@ class Alunos extends StatelessWidget {
         ),
         bottomNavigationBar: Bottom_Navigation_Bar(),
       ),
+      theme: style(),
     );
   }
 }
@@ -120,9 +114,9 @@ class _GerarAlunosState extends State<_GerarAlunos> {
       leading: Icon(Icons.person),
       title: Text(widget.nomeAluno),
       trailing: Checkbox(
-        side: BorderSide(color: Colors.white),
-        checkColor: Colors.black,
-        activeColor: Colors.white,
+        side: BorderSide(color: Color(0xFFFFB617)),
+        checkColor: Colors.white,
+        activeColor: Color(0xFFFFB617),
         value: isChecked,
         onChanged: (value) {
           setState(() {
@@ -130,23 +124,17 @@ class _GerarAlunosState extends State<_GerarAlunos> {
           });
         },
       ),
-      textColor: Colors.white,
-      iconColor: Colors.white,
-      tileColor: Colors.grey[850],
     );
   }
 }
 
-Widget gerarCabecalho(){
+Widget gerarCabecalho() {
   return ListTile(
-      title: Text("NOME"),
-      trailing: Text(
-        "Marcar Falta",
-      ),
-      textColor: Colors.white,
-      iconColor: Colors.white,
-      tileColor: Colors.grey[850],
-    );
+    title: Text("NOME"),
+    trailing: Text(
+      "Marcar Falta",
+    ),
+  );
 }
 
 Widget gerarAlunos(context) {

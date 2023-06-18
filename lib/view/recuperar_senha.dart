@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:chamada_univel/view/style.dart';
@@ -15,7 +14,6 @@ class Recuperar_Senha extends StatelessWidget {
             title: const Text("Recuperar Senha"),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: Colors.white,
               onPressed: () => Navigator.pop(context, false),
             )),
         body: _Body(),
