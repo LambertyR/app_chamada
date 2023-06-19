@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import 'view/bottom_navigation_bar.dart';
+import 'bottom_navigation_bar.dart';
 import 'menu_principal.dart';
 
 class Alunos extends StatelessWidget {
@@ -38,11 +38,11 @@ class Alunos extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: LinearGradient(
-                    begin: Alignment.bottomRight,
-                    end: Alignment.bottomCenter,
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
                     colors: [
-                      Color(0xFFFFB617),
-                      Colors.yellowAccent,
+                      Colors.green,
+                      Colors.green.shade900,
                     ],
                   ),
                 ),
@@ -53,7 +53,7 @@ class Alunos extends StatelessWidget {
                     Text(
                       "Disciplina: " + disciplina,
                       style: TextStyle(
-                        color: Colors.indigo[900],
+                        color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w500,
                       ),
@@ -61,7 +61,7 @@ class Alunos extends StatelessWidget {
                     Text(
                       "Data: " + formattedDate,
                       style: TextStyle(
-                        color: Colors.indigo[900],
+                        color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w500,
                       ),
@@ -79,10 +79,7 @@ class Alunos extends StatelessWidget {
                     child: ElevatedButton(
                       child: const Text('Salvar'),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Menu_Principal();
-                        }));
+                        Navigator.pop(context, false);
                       },
                     )),
               ),
@@ -114,9 +111,9 @@ class _GerarAlunosState extends State<_GerarAlunos> {
       leading: Icon(Icons.person),
       title: Text(widget.nomeAluno),
       trailing: Checkbox(
-        side: BorderSide(color: Color(0xFFFFB617)),
+        side: BorderSide(color: Colors.white),
         checkColor: Colors.white,
-        activeColor: Color(0xFFFFB617),
+        activeColor: Colors.green,
         value: isChecked,
         onChanged: (value) {
           setState(() {

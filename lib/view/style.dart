@@ -12,15 +12,15 @@ ThemeData style() {
 
     //Botão flutuante
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFFFFB617),
+      backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       hoverColor: Colors.indigo[900],
     ),
-    scaffoldBackgroundColor: Colors.purple,
+    scaffoldBackgroundColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFFFB617),
-          foregroundColor: Colors.indigo[900],
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
           textStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ ThemeData style() {
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor:
-            MaterialStateProperty.all<Color>(Color(0xFFFFB617)), // Cor do texto
+            MaterialStateProperty.all<Color>(Colors.green), // Cor do texto
         textStyle: MaterialStateProperty.all<TextStyle>(
           TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold), // Estilo do texto
@@ -38,42 +38,44 @@ ThemeData style() {
     ),
     // APP Bar
     appBarTheme: AppBarTheme(
-      backgroundColor: Color(0xFFFFB617),
-      iconTheme: IconThemeData(color: Colors.indigo[900]),
+      backgroundColor: Colors.green,
+      iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
-        color: Colors.indigo[900],
-        fontSize: 28,
+        color: Colors.white,
+        fontSize: 26,
         fontWeight: FontWeight.w500,
       ),
     ),
 
     // Icones
-    iconTheme: IconThemeData(color: Colors.indigo[900]),
+    iconTheme: IconThemeData(color: Colors.white),
 
     // Inputs
     inputDecorationTheme: InputDecorationTheme(
-      focusColor: Color(0xFFFFB617),
+      hintStyle: TextStyle(color: Colors.green),
+      focusColor: Colors.green,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      labelStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
       floatingLabelStyle: TextStyle(
         backgroundColor: Colors.transparent,
-        color: Colors.white,
+        color: Colors.green,
         fontWeight: FontWeight.bold,
       ),
     ),
     // Textos
-    textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
+
     // Bottom Menu
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFFFFB617),
-        unselectedItemColor: Colors.indigo[900],
-        selectedItemColor: Colors.indigo[900]),
+        backgroundColor: Colors.green,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white),
+
     listTileTheme: ListTileThemeData(
-      textColor: Color(0xFFFFB617),
-      iconColor: Color(0xFFFFB617),
-      tileColor: Colors.indigo[600],
+      textColor: Colors.white,
+      iconColor: Colors.white,
+      tileColor: Colors.grey.shade800,
     ),
   );
 }

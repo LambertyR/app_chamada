@@ -2,7 +2,7 @@
 
 import 'dart:ffi';
 
-import 'package:chamada_univel/alunos.dart';
+import 'package:chamada_univel/view/alunos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -63,11 +63,11 @@ Widget disciplinaCard(context, String nomeDisciplina) {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
-          begin: Alignment.bottomRight,
-          end: Alignment.bottomCenter,
+          begin: Alignment.centerRight,
+          end: Alignment.centerLeft,
           colors: [
-            Color(0xFFFFB617),
-            Colors.yellowAccent,
+            Colors.green,
+            Colors.green.shade900,
           ],
         ),
       ),
@@ -103,9 +103,7 @@ Widget NomeDiscipina(String nomeDisciplina) {
         Text(
           nomeDisciplina,
           style: TextStyle(
-              color: Colors.indigo[900],
-              fontWeight: FontWeight.w500,
-              fontSize: 35),
+              color: Colors.white, fontWeight: FontWeight.w500, fontSize: 35),
         )
       ]));
 }
