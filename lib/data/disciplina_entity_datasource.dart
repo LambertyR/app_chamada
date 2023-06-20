@@ -13,7 +13,7 @@ class DisciplinaSQLiteDataSource {
         $DISCIPLINA_COLUMN_NOME,
         $DISCIPLINA_COLUMN_PERFIL_ID)
         values(
-          '${disciplina.nome}', '${disciplina.perfil?.perfilID}'
+          '${disciplina.nome}', '${disciplina.perfil_id}'
       )''');
       queryAllRows();
       return true;
@@ -37,7 +37,7 @@ class DisciplinaSQLiteDataSource {
       DisciplinaEntity disciplina = DisciplinaEntity();
       disciplina.disciplinaID = row['disciplinaID'];
       disciplina.nome = row['nome'];
-      disciplina.perfil?.perfilID = row['professor_id'];
+      disciplina.perfil_id = row['professor_id'];
 
       disciplinas.add(disciplina);
     }
@@ -51,13 +51,13 @@ class DisciplinaSQLiteDataSource {
           'update $DISCIPLINA_TABLE_NAME set $DISCIPLINA_COLUMN_NOME = ?, $DISCIPLINA_COLUMN_PERFIL_ID = ?, where id = ?',
           [
             disciplina.nome,
-            disciplina.perfil?.perfilID,
+            disciplina.perfil_id,
             disciplina.disciplinaID,
           ]);
     });
   }
 
-  Future<void> deletarDisciplina(DisciplinaEntity disciplina) async {
+  Future<void> deletarPerfis(DisciplinaEntity disciplina) async {
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate('DELETE FROM $DISCIPLINA_TABLE_NAME WHERE id = ?',
@@ -75,15 +75,9 @@ class DisciplinaSQLiteDataSource {
       DisciplinaEntity disciplina = DisciplinaEntity();
       disciplina.disciplinaID = row['disciplinaID'];
       disciplina.nome = row['nome'];
-      disciplina.perfil?.perfilID = row['professor_id'];
+      disciplina.perfil_id = row['professor_id'];
       disciplinas.add(disciplina);
     }
     return disciplinas;
-  }
-  Future<void> deletarDisciplinas() async {
-    Database db = await Conexao.getConexaoDB();
-    await db.transaction((txn) async {
-      await txn.rawDelete('delete from $DISCIPLINA_TABLE_NAME');
-    });
   }
 }

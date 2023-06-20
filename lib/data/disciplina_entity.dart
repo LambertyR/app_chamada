@@ -3,10 +3,10 @@ import 'package:chamada_univel/data/perfil_Entity.dart';
 class DisciplinaEntity {
   late int? disciplinaID;
   String? nome;
-  PerfilEntity? perfil;
+  PerfilEntity? perfil_id;
 
   DisciplinaEntity({
     this.nome,
-    this.perfil,
+    this.perfil_id,
   });
 }

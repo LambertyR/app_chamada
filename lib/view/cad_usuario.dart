@@ -28,7 +28,6 @@ class _Cad_Usuario_State extends State<Cad_Usuario> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Cadastro de usuário'),
           backgroundColor: Colors.green,
@@ -159,6 +158,7 @@ class _Cad_Usuario_State extends State<Cad_Usuario> {
         child: ElevatedButton(
           onPressed: () async {
             if (confirmarsenhaController.text == senhaController.text) {
+              print('entrou');
               PerfilEntity perfil = new PerfilEntity();
               perfil.email = emailController.text;
               perfil.nome = nomeController.text;

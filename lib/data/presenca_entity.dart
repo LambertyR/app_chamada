@@ -1,12 +1,10 @@
-import 'package:chamada_univel/data/aluno_disciplina_entity.dart';
-
 class PresencaEntity {
   late int? presencaID;
-  AlunoDisciplinaEntity? aluno_disciplina;
+  int? aluno_disciplinaID;
   DateTime? data;
 
   PresencaEntity({
-    this.aluno_disciplina,
+    this.aluno_disciplinaID,
     this.data,
   });
 }
