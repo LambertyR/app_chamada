@@ -9,9 +9,9 @@ class AlunoDisciplinaSQLiteDataSource {
       final Database db = await Conexao.getConexaoDB();
       aluno_disciplina.aluno_disciplinaID =
           await db.rawInsert('''insert into $ALUNODISCIPLINA_TABLE_NAME(
-        $ALUNODISCIPLINA_COLUMN_ALUNOID, $ALUNODISCIPLINA_COLUMN_DISCIPLINAID)
+        $ALUNODISCIPLINA_COLUMN_ALUNO_ID, $ALUNODISCIPLINA_COLUMN_ALUNO_ID)
         values(
-          '${aluno_disciplina.alunoID}, ${aluno_disciplina.disciplinaID}'
+          '${aluno_disciplina.aluno?.alunoID}, ${aluno_disciplina.disciplina?.disciplinaID}'
       )''');
       queryAllRows();
       return true;
@@ -34,8 +34,8 @@ class AlunoDisciplinaSQLiteDataSource {
     for (var row in dnResult) {
       AlunoDisciplinaEntity aluno_disciplina = AlunoDisciplinaEntity();
       aluno_disciplina.aluno_disciplinaID = row['aluno_disciplinaID'];
-      aluno_disciplina.alunoID = row['alunoID'];
-      aluno_disciplina.disciplinaID = row['disciplinaID'];
+      aluno_disciplina.aluno?.alunoID = row['alunoID'];
+      aluno_disciplina.disciplina?.disciplinaID = row['disciplinaID'];
 
       aluno_disciplinas.add(aluno_disciplina);
     }
@@ -47,10 +47,10 @@ class AlunoDisciplinaSQLiteDataSource {
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
-          'update $ALUNODISCIPLINA_TABLE_NAME set $ALUNODISCIPLINA_COLUMN_ALUNOID = ?, $ALUNODISCIPLINA_COLUMN_DISCIPLINAID where id = ?',
+          'update $ALUNODISCIPLINA_TABLE_NAME set $ALUNODISCIPLINA_COLUMN_ALUNO_ID = ?, $ALUNODISCIPLINA_COLUMN_ALUNO_ID where id = ?',
           [
-            aluno_disciplina.disciplinaID,
-            aluno_disciplina.alunoID,
+            aluno_disciplina.disciplina?.disciplinaID,
+            aluno_disciplina.aluno?.alunoID,
             aluno_disciplina.aluno_disciplinaID,
           ]);
     });
@@ -70,13 +70,13 @@ class AlunoDisciplinaSQLiteDataSource {
     List<AlunoDisciplinaEntity> aluno_disciplinas = [];
     Database db = await Conexao.getConexaoDB();
     List<Map> dbResult = await db.rawQuery(
-        'SELECT * FROM $ALUNODISCIPLINA_TABLE_NAME WHERE $ALUNODISCIPLINA_COLUMN_ALUNOID LIKE ?',
+        'SELECT * FROM $ALUNODISCIPLINA_TABLE_NAME WHERE $ALUNODISCIPLINA_COLUMN_ALUNO_ID LIKE ?',
         ['%$filtro%']);
     for (var row in dbResult) {
       AlunoDisciplinaEntity aluno_disciplina = AlunoDisciplinaEntity();
       aluno_disciplina.aluno_disciplinaID = row['aluno_disciplinaID'];
-      aluno_disciplina.alunoID = row['alunoID'];
-      aluno_disciplina.disciplinaID = row['disciplinaID'];
+      aluno_disciplina.aluno?.alunoID = row['alunoID'];
+      aluno_disciplina.disciplina?.disciplinaID = row['disciplinaID'];
       aluno_disciplinas.add(aluno_disciplina);
     }
     return aluno_disciplinas;

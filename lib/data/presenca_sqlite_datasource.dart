@@ -11,7 +11,7 @@ class PresencaSQLiteDataSource {
           await db.rawInsert('''insert into $PRESENCA_TABLE_NAME(
         $PRESENCA_COLUMN_DATA, $PRESENCA_COLUMN_ALUNODISCIPLINA_ID)
         values(
-          '${presenca.data}, ${presenca.aluno_disciplinaID}'
+          '${presenca.data}, ${presenca.aluno_disciplina?.aluno_disciplinaID}'
       )''');
       queryAllRows();
       return true;
@@ -35,7 +35,7 @@ class PresencaSQLiteDataSource {
       PresencaEntity presenca = PresencaEntity();
       presenca.presencaID = row['presencaID'];
       presenca.data = row['nome'];
-      presenca.aluno_disciplinaID = row['aluno_disciplinaID'];
+      presenca.aluno_disciplina?.aluno_disciplinaID = row['aluno_disciplinaID'];
       presencas.add(presenca);
     }
     return presencas;
@@ -46,7 +46,7 @@ class PresencaSQLiteDataSource {
     await db.transaction((txn) async {
       await txn.rawUpdate(
           'update $PRESENCA_TABLE_NAME set $PRESENCA_COLUMN_DATA = ?,  $PRESENCA_COLUMN_ALUNODISCIPLINA_ID = ? where id = ?',
-          [presenca.data, presenca.aluno_disciplinaID, presenca.presencaID]);
+          [presenca.data, presenca.aluno_disciplina?.aluno_disciplinaID, presenca.presencaID]);
     });
   }
 

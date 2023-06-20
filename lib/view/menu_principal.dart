@@ -24,7 +24,7 @@ class _Menu_Principal extends State<Menu_Principal> {
         appBar: AppBar(
           title: const Text('Disciplinas'),
         ),
-        body: Disciplinas(),
+        //body: Disciplinas(),
         bottomNavigationBar: Bottom_Navigation_Bar(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

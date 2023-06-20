@@ -5,6 +5,7 @@ import 'conexao.dart';
 import 'data_container.dart';
 
 class PerfilSQLiteDataSource {
+  late final int id_perfil;
   Future create(PerfilEntity perfil) async {
     try {
       final Database db = await Conexao.getConexaoDB();
@@ -20,6 +21,22 @@ class PerfilSQLiteDataSource {
     } catch (ex) {
       return false;
     }
+  }
+
+  Future<PerfilEntity> buscarPerfil() async {
+    Database db = await Conexao.getConexaoDB();
+    List<Map> dnResult = await db.rawQuery('SELECT perfilID, noome, email, senha FROM $PERFIL_TABLE_NAME where $PERFIL_COLUMN_ID = ?',
+    ['%$id_perfil']);
+
+    PerfilEntity perfil = PerfilEntity();
+    for (var row in dnResult) {
+      perfil.perfilID = row['perfilID'];
+      perfil.nome = row['nome'];
+      perfil.email = row['email'];
+      perfil.senha = row['senha'];
+    }
+    print(perfil);
+    return perfil;
   }
 
   Future<List<Map<String, dynamic>>> queryAllRows() async {
@@ -84,10 +101,19 @@ class PerfilSQLiteDataSource {
     Database db = await Conexao.getConexaoDB();
     List<Map> dbResult = await db.rawQuery(
         'SELECT * from $PERFIL_TABLE_NAME where $PERFIL_COLUMN_EMAIL = "${login}" and $PERFIL_COLUMN_SENHA = "${senha}"');
+    for (var row in dbResult) {
+      PerfilEntity perfil = PerfilEntity();
+      perfil.perfilID = row['perfilID'];
+      perfil.nome = row['nome'];
+      perfil.email = row['email'];
+      perfil.senha = row['senha'];
+      id_perfil = row['perfilID'];
+    }
 
     if (dbResult.isEmpty)
       return false;
-    else
+    else {
       return true;
+    }
   }
 }
