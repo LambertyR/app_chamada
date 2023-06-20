@@ -8,6 +8,7 @@ import 'package:chamada_univel/view/bottom_navigation_bar.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 import 'menu_principal.dart';
+import 'menu_principal_copy.dart';
 
 class AddDisciplina extends StatelessWidget {
   const AddDisciplina({super.key});
@@ -59,13 +60,26 @@ class _AddDisciplina extends StatelessWidget {
                     onPressed: () async {
                       // ------------------------ alterado aqui
                       DisciplinaEntity disciplina = new DisciplinaEntity();
-                      disciplina.nome = nomeController.toString();
+                      disciplina.nome = nomeController.text;
                       disciplina.perfil = (await PerfilSQLiteDataSource()
                           .buscarPerfil()) as PerfilEntity?;
 
                       if (await DisciplinaSQLiteDataSource()
                           .create(disciplina)) {
-                        Navigator.pop(context, false);
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Sucesso!"),
+                                content: Text("A Disciplina " +
+                                    nomeController.text +
+                                    " foi adicionada."),
+                              );
+                            });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return MenuPrincipal();
+                        }));
                       } else {
                         showDialog(
                             context: context,

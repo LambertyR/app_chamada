@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'bottom_navigation_bar.dart';
-import 'menu_principal.dart';
+import 'menu_principal_copy.dart';
 
 class Alunos extends StatelessWidget {
   String disciplina = '';

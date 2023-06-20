@@ -1,3 +1,5 @@
+import 'package:chamada_univel/data/instancia_entity.dart';
+import 'package:chamada_univel/data/instancia_sqlite_datasource.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'perfil_entity.dart';
@@ -6,6 +8,7 @@ import 'data_container.dart';
 
 class PerfilSQLiteDataSource {
   Future create(PerfilEntity perfil) async {
+    print("* * * * * * * * CREATE PERFIL * * * * * * * *");
     try {
       final Database db = await Conexao.getConexaoDB();
       perfil.perfilID = await db.rawInsert('''insert into $PERFIL_TABLE_NAME(
@@ -23,20 +26,23 @@ class PerfilSQLiteDataSource {
   }
 
   Future<PerfilEntity?> buscarPerfil() async {
+    print("* * * * * * * * BUSCAR PERFIL * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
-
+    InstanciaEntity? instancia =
+        await InstanciaSQLiteDataSource().getAllInstancia() as InstanciaEntity?;
     List<Map> dnResult = await db.rawQuery(
         'SELECT $PERFIL_COLUMN_ID, $PERFIL_COLUMN_NOME, $PERFIL_COLUMN_EMAIL, $PERFIL_COLUMN_SENHA FROM $PERFIL_TABLE_NAME where $PERFIL_COLUMN_ID = ?',
-        ['id_perfil']);
+        ['${instancia?.instanciaID}']);
 
     PerfilEntity? perfil = new PerfilEntity();
+    perfil.perfilID = 0;
     for (var row in dnResult) {
       perfil.perfilID = row['perfilID'];
       perfil.nome = row['nome'];
       perfil.email = row['email'];
       perfil.senha = row['senha'];
     }
-    print(perfil);
+
     return perfil;
   }
 
@@ -46,6 +52,7 @@ class PerfilSQLiteDataSource {
   }
 
   Future<List<PerfilEntity>> getAllPerfil() async {
+    print("* * * * * * * * GET ALL PERFIL * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     List<Map> dnResult = await db.rawQuery('SELECT * FROM $PERFIL_TABLE_NAME');
 
@@ -63,6 +70,7 @@ class PerfilSQLiteDataSource {
   }
 
   Future<void> atualizarPerfil(PerfilEntity perfil) async {
+    print("* * * * * * * * ATUALIZAR PERFIL * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
@@ -73,6 +81,7 @@ class PerfilSQLiteDataSource {
   }
 
   Future<void> deletarPerfis(PerfilEntity perfil) async {
+    print("* * * * * * * * DELETAR PERFIS * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
@@ -81,6 +90,7 @@ class PerfilSQLiteDataSource {
   }
 
   Future<List<PerfilEntity>> pesquisarSenha(String filtro) async {
+    print("* * * * * * * * PESQUISAR SENHA * * * * * * * *");
     List<PerfilEntity> perfis = [];
     Database db = await Conexao.getConexaoDB();
     List<Map> dbResult = await db.rawQuery(
@@ -100,6 +110,9 @@ class PerfilSQLiteDataSource {
 
   Future<bool> getPerfilLogin(login, senha) async {
     Database db = await Conexao.getConexaoDB();
+    InstanciaEntity instancia = new InstanciaEntity();
+    //instancia.instanciaID = 0;
+    print("* * * * * * * * GET PERFIL LOGIN * * * * * * * *");
     List<Map> dbResult = await db.rawQuery(
         'SELECT * from $PERFIL_TABLE_NAME where $PERFIL_COLUMN_EMAIL = "${login}" and $PERFIL_COLUMN_SENHA = "${senha}"');
     for (var row in dbResult) {
@@ -108,6 +121,8 @@ class PerfilSQLiteDataSource {
       perfil.nome = row['nome'];
       perfil.email = row['email'];
       perfil.senha = row['senha'];
+      instancia.instanciaID = row['perfilID'];
+      InstanciaSQLiteDataSource().create(instancia);
     }
     if (dbResult.isEmpty)
       return false;

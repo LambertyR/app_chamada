@@ -1,3 +1,7 @@
+import 'package:chamada_univel/data/instancia_entity.dart';
+import 'package:chamada_univel/data/instancia_sqlite_datasource.dart';
+import 'package:chamada_univel/data/perfil_entity.dart';
+import 'package:chamada_univel/data/perfil_sqlite_datasource.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'disciplina_entity.dart';
@@ -6,6 +10,7 @@ import 'data_container.dart';
 
 class DisciplinaSQLiteDataSource {
   Future create(DisciplinaEntity disciplina) async {
+    print("* * * * * * * * CREATE DISCIPLINA * * * * * * * *");
     try {
       final Database db = await Conexao.getConexaoDB();
       disciplina.disciplinaID =
@@ -28,9 +33,13 @@ class DisciplinaSQLiteDataSource {
   }
 
   Future<List<DisciplinaEntity>> getAllDisciplina() async {
+    print("* * * * * * * * GET ALL DISCIPLINA * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
-    List<Map> dnResult =
-        await db.rawQuery('SELECT * FROM $DISCIPLINA_TABLE_NAME');
+    PerfilEntity? perfil = new PerfilEntity();
+    perfil = await PerfilSQLiteDataSource().buscarPerfil() as PerfilEntity?;
+    List<Map> dnResult = await db.rawQuery(
+        'SELECT * FROM $DISCIPLINA_TABLE_NAME where $DISCIPLINA_COLUMN_PERFIL_ID = ?',
+        [perfil?.perfilID]);
 
     List<DisciplinaEntity> disciplinas = [];
     for (var row in dnResult) {
@@ -45,6 +54,7 @@ class DisciplinaSQLiteDataSource {
   }
 
   Future<void> atualizarDisciplina(DisciplinaEntity disciplina) async {
+    print("* * * * * * * * ATUALIZAR DISCIPLINA * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
@@ -58,6 +68,7 @@ class DisciplinaSQLiteDataSource {
   }
 
   Future<void> deletarDisciplina(int disciplinaID) async {
+    print("* * * * * * * * DELETAR DISCIPLINA * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
@@ -66,23 +77,25 @@ class DisciplinaSQLiteDataSource {
     });
   }
 
-  Future<List<DisciplinaEntity>> pesquisarSenha(String filtro) async {
-    List<DisciplinaEntity> disciplinas = [];
-    Database db = await Conexao.getConexaoDB();
-    List<Map> dbResult = await db.rawQuery(
-        'SELECT * FROM $DISCIPLINA_TABLE_NAME WHERE $DISCIPLINA_COLUMN_NOME LIKE ?',
-        ['%$filtro%']);
-    for (var row in dbResult) {
-      DisciplinaEntity disciplina = DisciplinaEntity();
-      disciplina.disciplinaID = row['disciplinaID'];
-      disciplina.nome = row['nome'];
-      disciplina.perfil?.perfilID = row['professor_id'];
-      disciplinas.add(disciplina);
-    }
-    return disciplinas;
-  }
+  // Future<List<DisciplinaEntity>> pesquisarSenha(String filtro) async {
+  //   print("* * * * * * * * GET ALL DISCIPLINA * * * * * * * *");
+  //   List<DisciplinaEntity> disciplinas = [];
+  //   Database db = await Conexao.getConexaoDB();
+  //   List<Map> dbResult = await db.rawQuery(
+  //       'SELECT * FROM $DISCIPLINA_TABLE_NAME WHERE $DISCIPLINA_COLUMN_NOME LIKE ?',
+  //       ['%$filtro%']);
+  //   for (var row in dbResult) {
+  //     DisciplinaEntity disciplina = DisciplinaEntity();
+  //     disciplina.disciplinaID = row['disciplinaID'];
+  //     disciplina.nome = row['nome'];
+  //     disciplina.perfil?.perfilID = row['professor_id'];
+  //     disciplinas.add(disciplina);
+  //   }
+  //   return disciplinas;
+  // }
 
   Future<void> deletarDisciplinas() async {
+    print("* * * * * * * * DELETAR DISCIPLINAS * * * * * * * *");
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawDelete('delete from $DISCIPLINA_TABLE_NAME');

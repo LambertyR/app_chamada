@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 
 ThemeData style() {
-  ThemeData base = ThemeData.light();
-  return base.copyWith(
+  ThemeData base = ThemeData();
+  return ThemeData(
     primaryColor: Colors.red,
+    primarySwatch: Colors.green,
     colorScheme: ColorScheme.light(),
     textSelectionTheme:
         TextSelectionThemeData(cursorColor: Color.fromARGB(255, 24, 45, 233)),

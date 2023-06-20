@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:chamada_univel/data/instancia_sqlite_datasource.dart';
 import 'package:chamada_univel/view/cad_usuario.dart';
 import 'package:chamada_univel/view/recuperar_senha.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
-
+import 'package:chamada_univel/view/menu_principal.dart';
 import '../data/perfil_sqlite_datasource.dart';
-import 'disciplinas.dart';
-import 'menu_principal.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

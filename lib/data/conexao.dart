@@ -18,6 +18,7 @@ class Conexao {
         await db.execute(CREATE_ALUNO_TABLE_SCRIPT);
         await db.execute(CREATE_ALUNODISCIPLINA_TABLE_SCRIPT);
         await db.execute(CREATE_PRESENCA_TABLE_SCRIPT);
+        await db.execute(CREATE_INSTANCIA_TABLE_SCRIPT);
 
         await db.rawInsert('''insert into $PERFIL_TABLE_NAME(
               $PERFIL_COLUMN_NOME,
