@@ -7,7 +7,6 @@ import 'package:chamada_univel/view/alunos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-
 import 'login.dart';
 
 // ignore_for_file: prefer_const_constructors
@@ -43,10 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
   build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Senhas cadastradas"),
+        title: Text("Disciplinas"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          color: Colors.black38,
           onPressed: () => Navigator.pop(context, false),
         ),
         actions: <Widget>[
@@ -56,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {});
               },
               child: Text(
-                "Excluir todos",
+                "Excluir Todas",
                 style: TextStyle(color: Colors.white),
               ))
         ],
@@ -75,19 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     key: UniqueKey(),
                     background: Container(color: Colors.blue),
                     onDismissed: (direction) {
-                      DisciplinaSQLiteDataSource().deletarDisciplina(item);
+                      DisciplinaSQLiteDataSource()
+                          .deletarDisciplina(item.disciplinaID!);
                     },
-                    child: ListTile(
-                      title: Text(item.nome!),
-                      onTap: () { // alterar aqui
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return new Alunos(disciplina: item.nome!);
-                          }),
-                        );
-                      },
-                    ),
+                    child: disciplinaCard(context, item),
                   );
                 },
               );
@@ -106,40 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-
-/*
-class Disciplinas extends StatelessWidget {
-  const Disciplinas({super.key});
-
-  @override
-  Widget build(BuildContext context) => FutureBuilder<List<DisciplinaEntity>>(
-          future: DisciplinaSQLiteDataSource().getAllDisciplina(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<DisciplinaEntity>> snapshot) {
-            if (snapshot.hasData) {
-              
-    }});
-}
-
-Widget gerarDisciplinas(context) {
-
-  return SizedBox(
-    width: MediaQuery.of(context).size.width,
-    child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: disciplinas),
-  );
-}
-
-Widget disciplinaCard(context, String nomeDisciplina) {
+Widget disciplinaCard(context, DisciplinaEntity disciplina) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return new Alunos(disciplina: nomeDisciplina);
+          return new Alunos(disciplina: disciplina.nome!);
         }),
       );
     },
@@ -162,7 +124,7 @@ Widget disciplinaCard(context, String nomeDisciplina) {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          NomeDiscipina(nomeDisciplina),
+          NomeDiscipina(disciplina.nome!),
           Expanded(
               child: Container(
                   alignment: Alignment.centerRight, child: SetaDireita()))
@@ -194,4 +156,3 @@ Widget NomeDiscipina(String nomeDisciplina) {
         )
       ]));
 }
-*/

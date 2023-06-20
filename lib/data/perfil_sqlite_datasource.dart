@@ -5,7 +5,6 @@ import 'conexao.dart';
 import 'data_container.dart';
 
 class PerfilSQLiteDataSource {
-  late final int id_perfil;
   Future create(PerfilEntity perfil) async {
     try {
       final Database db = await Conexao.getConexaoDB();
@@ -23,12 +22,14 @@ class PerfilSQLiteDataSource {
     }
   }
 
-  Future<PerfilEntity> buscarPerfil() async {
+  Future<PerfilEntity?> buscarPerfil() async {
     Database db = await Conexao.getConexaoDB();
-    List<Map> dnResult = await db.rawQuery('SELECT perfilID, noome, email, senha FROM $PERFIL_TABLE_NAME where $PERFIL_COLUMN_ID = ?',
-    ['%$id_perfil']);
 
-    PerfilEntity perfil = PerfilEntity();
+    List<Map> dnResult = await db.rawQuery(
+        'SELECT $PERFIL_COLUMN_ID, $PERFIL_COLUMN_NOME, $PERFIL_COLUMN_EMAIL, $PERFIL_COLUMN_SENHA FROM $PERFIL_TABLE_NAME where $PERFIL_COLUMN_ID = ?',
+        ['id_perfil']);
+
+    PerfilEntity? perfil = new PerfilEntity();
     for (var row in dnResult) {
       perfil.perfilID = row['perfilID'];
       perfil.nome = row['nome'];
@@ -107,9 +108,7 @@ class PerfilSQLiteDataSource {
       perfil.nome = row['nome'];
       perfil.email = row['email'];
       perfil.senha = row['senha'];
-      id_perfil = row['perfilID'];
     }
-
     if (dbResult.isEmpty)
       return false;
     else {

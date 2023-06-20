@@ -2,12 +2,11 @@
 //import 'package:chamada_univel/recuperar_senha.dart';
 import 'package:chamada_univel/data/disciplina_entity.dart';
 import 'package:chamada_univel/data/disciplina_sqlite_datasource.dart';
+import 'package:chamada_univel/data/perfil_entity.dart';
 import 'package:chamada_univel/data/perfil_sqlite_datasource.dart';
 import 'package:chamada_univel/view/bottom_navigation_bar.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
-
-import '../data/perfil_Entity.dart';
 import 'menu_principal.dart';
 
 class AddDisciplina extends StatelessWidget {
@@ -59,17 +58,15 @@ class _AddDisciplina extends StatelessWidget {
                     child: const Text('Adicionar'),
                     onPressed: () async {
                       // ------------------------ alterado aqui
-                      PerfilEntity perfil = new PerfilEntity();
-                      perfil = (await PerfilSQLiteDataSource().buscarPerfil())
-                          as PerfilEntity;
                       DisciplinaEntity disciplina = new DisciplinaEntity();
-                      disciplina.nome = nomeController as String?;
-                      disciplina.perfil = perfil;
+                      disciplina.nome = nomeController.toString();
+                      disciplina.perfil = (await PerfilSQLiteDataSource()
+                          .buscarPerfil()) as PerfilEntity?;
 
-                      if (await DisciplinaSQLiteDataSource().create(disciplina)) {
+                      if (await DisciplinaSQLiteDataSource()
+                          .create(disciplina)) {
                         Navigator.pop(context, false);
-                        }
-                       else {
+                      } else {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {

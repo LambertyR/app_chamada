@@ -26,6 +26,12 @@ class Conexao {
               values(
                 'admin','admin@admin','123') 
               ''');
+        await db.rawInsert('''insert into $DISCIPLINA_TABLE_NAME(
+              $DISCIPLINA_COLUMN_NOME,
+              $DISCIPLINA_COLUMN_PERFIL_ID)
+              values(
+                'Matemática',1) 
+              ''');
       });
     }
     return _database!;

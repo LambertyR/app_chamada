@@ -1,4 +1,4 @@
-import 'package:chamada_univel/data/perfil_Entity.dart';
+import 'package:chamada_univel/data/perfil_entity.dart';
 
 class DisciplinaEntity {
   late int? disciplinaID;

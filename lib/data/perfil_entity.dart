@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 class PerfilEntity {
   late int? perfilID;
   String? nome;
