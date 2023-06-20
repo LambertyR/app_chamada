@@ -5,6 +5,7 @@ import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 
 import '../data/perfil_sqlite_datasource.dart';
+import 'disciplinas.dart';
 import 'menu_principal.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Chamada Online'),
         ),
@@ -113,9 +115,7 @@ class _Login extends State<Login> {
                         .getPerfilLogin(email, pass)) {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Menu_Principal(
-                          email: email,
-                        );
+                        return MenuPrincipal();
                       }));
                     } else {
                       showDialog(

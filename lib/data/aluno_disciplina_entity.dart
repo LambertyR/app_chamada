@@ -1,10 +1,13 @@
+import 'package:chamada_univel/data/aluno_entity.dart';
+import 'package:chamada_univel/data/disciplina_entity.dart';
+
 class AlunoDisciplinaEntity {
   late int? aluno_disciplinaID;
-  int? alunoID;
-  int? disciplinaID;
+  AlunoEntity? aluno;
+  DisciplinaEntity? disciplina;
 
   AlunoDisciplinaEntity({
-    this.alunoID,
-    this.disciplinaID,
+    this.aluno,
+    this.disciplina,
   });
 }

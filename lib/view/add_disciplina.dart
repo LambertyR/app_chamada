@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:chamada_univel/recuperar_senha.dart';
+import 'package:chamada_univel/data/disciplina_entity.dart';
+import 'package:chamada_univel/data/disciplina_sqlite_datasource.dart';
+import 'package:chamada_univel/data/perfil_sqlite_datasource.dart';
 import 'package:chamada_univel/view/bottom_navigation_bar.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 
+import '../data/perfil_Entity.dart';
 import 'menu_principal.dart';
 
 class AddDisciplina extends StatelessWidget {
@@ -28,28 +32,19 @@ class AddDisciplina extends StatelessWidget {
 }
 
 class _AddDisciplina extends StatelessWidget {
-  String email = '';
-  String pass = '';
+  TextEditingController nomeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            // Container(
-            //     alignment: Alignment.center,
-            //     padding: const EdgeInsets.all(10),
-            //     margin: const EdgeInsets.only(bottom: 50, top: 30),
-            //     child: const Text(
-
-            //       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
-            //     )),
-
             Container(
               padding: const EdgeInsets.all(10),
 
               // ignore: prefer_const_constructors
               child: TextField(
+                controller: nomeController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Nome da Disciplina',
@@ -61,11 +56,31 @@ class _AddDisciplina extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
                 child: ElevatedButton(
-                  child: const Text('Adicionar'),
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                )),
+                    child: const Text('Adicionar'),
+                    onPressed: () async {
+                      // ------------------------ alterado aqui
+                      PerfilEntity perfil = new PerfilEntity();
+                      perfil = (await PerfilSQLiteDataSource().buscarPerfil())
+                          as PerfilEntity;
+                      DisciplinaEntity disciplina = new DisciplinaEntity();
+                      disciplina.nome = nomeController as String?;
+                      disciplina.perfil = perfil;
+
+                      if (await DisciplinaSQLiteDataSource().create(disciplina)) {
+                        Navigator.pop(context, false);
+                        }
+                       else {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Falha ao Adicionar Disciplina!"),
+                                content: Text("Verifique o usuário."),
+                              );
+                            });
+                      }
+                      // -----------------------------------------------------------
+                    })),
           ],
         ));
   }
