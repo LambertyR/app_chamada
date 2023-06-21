@@ -3,7 +3,7 @@ const String DATABASE_PRIMEIROAPP = 'chamada_db';
 // * * * Perfil * * *
 const String PERFIL_TABLE_NAME = 'perfil';
 const String PERFIL_COLUMN_ID = 'perfilID';
-const String PERFIL_COLUMN_NOME = 'nome';
+const String PERFIL_COLUMN_NOME = 'perfilNome';
 const String PERFIL_COLUMN_EMAIL = 'email';
 const String PERFIL_COLUMN_SENHA = 'senha';
 
@@ -18,7 +18,7 @@ CREATE TABLE $PERFIL_TABLE_NAME(
 // * * * Disciplina * * *
 const String DISCIPLINA_TABLE_NAME = 'disciplina';
 const String DISCIPLINA_COLUMN_ID = 'disciplinaID';
-const String DISCIPLINA_COLUMN_NOME = 'nome';
+const String DISCIPLINA_COLUMN_NOME = 'disciplinaNome';
 const String DISCIPLINA_COLUMN_PERFIL_ID = 'perfilID';
 
 const String CREATE_DISCIPLINA_TABLE_SCRIPT = '''
@@ -32,12 +32,14 @@ CREATE TABLE $DISCIPLINA_TABLE_NAME(
 // * * * Aluno * * *
 const String ALUNO_TABLE_NAME = 'aluno';
 const String ALUNO_COLUMN_ID = 'alunoID';
-const String ALUNO_COLUMN_NOME = 'nome';
+const String ALUNO_COLUMN_NOME = 'alunoNome';
+const String ALUNO_COLUMN_REGISTRO = 'registro';
 
 const String CREATE_ALUNO_TABLE_SCRIPT = '''
 CREATE TABLE $ALUNO_TABLE_NAME(
   $ALUNO_COLUMN_ID INTEGER PRIMARY KEY,
-  $ALUNO_COLUMN_NOME TEXT
+  $ALUNO_COLUMN_NOME TEXT,
+  $ALUNO_COLUMN_REGISTRO INTEGER UNIQUE
 )''';
 
 // * * * AlunoDisciplina * * *

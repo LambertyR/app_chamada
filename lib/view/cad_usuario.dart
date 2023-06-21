@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_element, camel_case_types
 
 import 'package:chamada_univel/data/perfil_sqlite_datasource.dart';
+import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chamada_univel/data/perfil_entity.dart';
@@ -27,14 +28,13 @@ class _Cad_Usuario_State extends State<Cad_Usuario> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: style(),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Cadastro de usuário'),
-          backgroundColor: Colors.green,
+          title: const Text('Cadastro de Usuário'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.black38,
             onPressed: () => Navigator.pop(context, false),
           ),
           actions: [IconButton(onPressed: null, icon: Icon(Icons.save))],
@@ -72,6 +72,7 @@ class _Cad_Usuario_State extends State<Cad_Usuario> {
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
+        controller: nomeController,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Nome',
@@ -187,9 +188,6 @@ class _Cad_Usuario_State extends State<Cad_Usuario> {
                   });
             }
           },
-          style: ElevatedButton.styleFrom(
-            primary: Colors.green,
-          ),
           child: const Text('Cadastrar'),
         ),
       ),

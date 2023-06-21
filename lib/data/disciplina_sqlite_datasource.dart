@@ -44,9 +44,9 @@ class DisciplinaSQLiteDataSource {
     List<DisciplinaEntity> disciplinas = [];
     for (var row in dnResult) {
       DisciplinaEntity disciplina = DisciplinaEntity();
-      disciplina.disciplinaID = row['disciplinaID'];
-      disciplina.nome = row['nome'];
-      disciplina.perfil?.perfilID = row['perfilID'];
+      disciplina.disciplinaID = row['$DISCIPLINA_COLUMN_ID'];
+      disciplina.nome = row['$DISCIPLINA_COLUMN_NOME'];
+      disciplina.perfil?.perfilID = row['$DISCIPLINA_COLUMN_PERFIL_ID'];
 
       disciplinas.add(disciplina);
     }

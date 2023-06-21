@@ -58,7 +58,6 @@ class _AddDisciplina extends StatelessWidget {
                 child: ElevatedButton(
                     child: const Text('Adicionar'),
                     onPressed: () async {
-                      // ------------------------ alterado aqui
                       DisciplinaEntity disciplina = new DisciplinaEntity();
                       disciplina.nome = nomeController.text;
                       disciplina.perfil = (await PerfilSQLiteDataSource()

@@ -3,7 +3,6 @@ import '../view/login.dart';
 import '../view/style.dart';
 
 void main() => runApp(new MaterialApp(
-      title: "Chamada",
       home: Scaffold(
         body: new MyApp(),
       ),

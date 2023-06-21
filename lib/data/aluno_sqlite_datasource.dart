@@ -5,12 +5,13 @@ import 'data_container.dart';
 
 class AlunoSQLiteDataSource {
   Future create(AlunoEntity aluno) async {
+    print("* * * * * * * * CREATE ALUNO * * * * * * * *");
     try {
       final Database db = await Conexao.getConexaoDB();
       aluno.alunoID = await db.rawInsert('''insert into $ALUNO_TABLE_NAME(
-        $ALUNO_COLUMN_NOME)
+        $ALUNO_COLUMN_NOME, $ALUNO_COLUMN_REGISTRO)
         values(
-          '${aluno.nome}'
+          '${aluno.nome}',${aluno.registro}
       )''');
       queryAllRows();
       return true;
@@ -39,6 +40,24 @@ class AlunoSQLiteDataSource {
     return alunos;
   }
 
+  Future<bool> verificaRegistro(AlunoEntity alunoFiltro) async {
+    print("* * * * * * * * VERIFICA REGISTRO * * * * * * * *");
+    Database db = await Conexao.getConexaoDB();
+    try {
+      List<Map> dnResult = await db.rawQuery(
+          'SELECT * FROM $ALUNO_TABLE_NAME ' +
+              'WHERE $ALUNO_COLUMN_REGISTRO = ?',
+          ['${alunoFiltro.registro}']);
+      if (dnResult.isEmpty) {
+        return false;
+      }
+      return true;
+    } catch (ex) {
+      print(ex);
+      return false;
+    }
+  }
+
   Future<void> atualizarAluno(AlunoEntity aluno) async {
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
@@ -50,13 +69,21 @@ class AlunoSQLiteDataSource {
     });
   }
 
-  Future<void> deletarPerfis(AlunoEntity aluno) async {
+  Future<void> deletarAluno(AlunoEntity aluno) async {
     Database db = await Conexao.getConexaoDB();
     await db.transaction((txn) async {
       await txn.rawUpdate(
           'DELETE FROM $ALUNO_TABLE_NAME WHERE id = ?', [aluno.alunoID]);
     });
   }
+
+  // Future<void> deletarAluno(AlunoEntity aluno) async {
+  //   Database db = await Conexao.getConexaoDB();
+  //   await db.transaction((txn) async {
+  //     await txn.rawUpdate(
+  //         'DELETE FROM $ALUNO_TABLE_NAME WHERE id = ?', [aluno.alunoID]);
+  //   });
+  // }
 
   Future<List<AlunoEntity>> pesquisarSenha(String filtro) async {
     List<AlunoEntity> alunos = [];

@@ -61,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: FutureBuilder<List<DisciplinaEntity>>(
-        // Verificar aqui
         future: DisciplinaSQLiteDataSource().getAllDisciplina(),
         builder: (BuildContext context,
             AsyncSnapshot<List<DisciplinaEntity>> snapshot) {
@@ -74,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 DisciplinaEntity item = snapshot.data![index];
                 return Dismissible(
                   key: UniqueKey(),
-                  background: Container(color: Colors.blue),
+                  background: Container(color: Colors.green),
                   onDismissed: (direction) {
                     DisciplinaSQLiteDataSource()
                         .deletarDisciplina(item.disciplinaID!);
@@ -105,7 +104,7 @@ Widget disciplinaCard(context, DisciplinaEntity disciplina) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return new Alunos(disciplina: disciplina.nome!);
+          return new Alunos(disciplina: disciplina);
         }),
       );
     },
@@ -128,7 +127,7 @@ Widget disciplinaCard(context, DisciplinaEntity disciplina) {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          NomeDiscipina(disciplina.nome!),
+          NomeDiscipina(disciplina),
           Expanded(
               child: Container(
                   alignment: Alignment.centerRight, child: SetaDireita()))
@@ -148,13 +147,13 @@ Widget SetaDireita() {
   );
 }
 
-Widget NomeDiscipina(String nomeDisciplina) {
+Widget NomeDiscipina(DisciplinaEntity disciplina) {
   return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(top: 25, left: 25),
       child: Column(children: [
         Text(
-          nomeDisciplina,
+          disciplina.nome!,
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.w500, fontSize: 35),
         )

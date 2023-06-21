@@ -31,7 +31,32 @@ class Conexao {
               $DISCIPLINA_COLUMN_NOME,
               $DISCIPLINA_COLUMN_PERFIL_ID)
               values(
-                'Matemática',1) 
+                'Matemática',1),
+                ('Português', 1)
+              ''');
+        await db.rawInsert('''insert into $ALUNO_TABLE_NAME(
+              $ALUNO_COLUMN_NOME, $ALUNO_COLUMN_REGISTRO)
+              values(
+                'João',123),
+                ('Maria',124) ,
+                ('Clebinho',125),
+                ('Kami',126),
+                ('Theodoro',127),
+                ('Ana',128),
+                ('Rafael',129)
+              ''');
+        await db.rawInsert('''insert into $ALUNODISCIPLINA_TABLE_NAME(
+              $ALUNODISCIPLINA_COLUMN_ALUNO_ID, $ALUNODISCIPLINA_COLUMN_DISCIPLINA_ID)
+              values(
+                1,1),
+                (2,1) ,
+                (3,1),
+                (4,1),
+                (5,1),
+                (6,1),
+                (7,1),
+                (1,2),
+                (2,2)
               ''');
       });
     }
