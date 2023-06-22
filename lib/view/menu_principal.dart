@@ -97,6 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
 Widget disciplinaCard(context, DisciplinaEntity disciplina) {
   return GestureDetector(
     onTap: () {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Atenção!!'),
+              content: Text('Marcar o checkbox para Faltas.'),
+            );
+          });
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {

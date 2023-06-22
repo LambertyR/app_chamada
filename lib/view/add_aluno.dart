@@ -113,8 +113,10 @@ class _AddAluno extends State<AddAluno> {
             if (await AlunoSQLiteDataSource().verificaRegistro(aluno)) {
               print('Registro Existe');
               AlunoDisciplinaEntity aluno_disciplina = AlunoDisciplinaEntity();
-              aluno_disciplina.aluno = aluno;
+              aluno_disciplina.aluno =
+                  await AlunoSQLiteDataSource().pesquisarAluno(aluno);
               aluno_disciplina.disciplina = disciplina;
+
               // Registra na tabela aluno_disciplina
               if (await AlunoDisciplinaSQLiteDataSource()
                   .create(aluno_disciplina)) {

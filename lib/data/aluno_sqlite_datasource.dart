@@ -77,26 +77,17 @@ class AlunoSQLiteDataSource {
     });
   }
 
-  // Future<void> deletarAluno(AlunoEntity aluno) async {
-  //   Database db = await Conexao.getConexaoDB();
-  //   await db.transaction((txn) async {
-  //     await txn.rawUpdate(
-  //         'DELETE FROM $ALUNO_TABLE_NAME WHERE id = ?', [aluno.alunoID]);
-  //   });
-  // }
-
-  Future<List<AlunoEntity>> pesquisarSenha(String filtro) async {
-    List<AlunoEntity> alunos = [];
+  Future<AlunoEntity> pesquisarAluno(AlunoEntity _aluno) async {
     Database db = await Conexao.getConexaoDB();
     List<Map> dbResult = await db.rawQuery(
-        'SELECT * FROM $ALUNO_TABLE_NAME WHERE $ALUNO_COLUMN_NOME LIKE ?',
-        ['%$filtro%']);
+        'SELECT * FROM $ALUNO_TABLE_NAME ' + 'WHERE $ALUNO_COLUMN_REGISTRO = ?',
+        ['${_aluno.registro}']);
+    AlunoEntity aluno = AlunoEntity();
     for (var row in dbResult) {
-      AlunoEntity aluno = AlunoEntity();
       aluno.alunoID = row['alunoID'];
       aluno.nome = row['nome'];
-      alunos.add(aluno);
+      aluno.registro = row['registro'];
     }
-    return alunos;
+    return aluno;
   }
 }

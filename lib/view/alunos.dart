@@ -171,7 +171,8 @@ class _AlunosHP extends State<AlunosHP> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Presenças Marcadas!"),
+                          title: Text(
+                              "Presenças Marcadas para ${DateFormat('dd/MM/yyyy').format(DateTime.now())}!"),
                         );
                       });
                 },
