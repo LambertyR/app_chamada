@@ -5,9 +5,11 @@ class AlunoDisciplinaEntity {
   late int? aluno_disciplinaID;
   AlunoEntity? aluno;
   DisciplinaEntity? disciplina;
+  bool? falta;
 
   AlunoDisciplinaEntity({
     this.aluno,
     this.disciplina,
+    this.falta,
   });
 }

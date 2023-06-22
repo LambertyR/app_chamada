@@ -44,10 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: Bottom_Navigation_Bar(),
       appBar: AppBar(
         title: Text("Disciplinas"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context, false),
-        ),
         actions: <Widget>[
           ElevatedButton(
               onPressed: () {

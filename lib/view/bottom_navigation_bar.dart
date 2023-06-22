@@ -21,17 +21,17 @@ class _Bottom_Navigation_Bar extends State<Bottom_Navigation_Bar> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Perfil',
+          label: 'Perfil (Not Implemented yet)',
         ),
-        BottomNavigationBarItem(
-          icon: IconButton(
-              icon: Icon(Icons.checklist_rtl_sharp),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => MenuPrincipal()));
-              }),
-          label: "Listar Presenças",
-        ),
+        // BottomNavigationBarItem(
+        //   icon: IconButton(
+        //       icon: Icon(Icons.checklist_rtl_sharp),
+        //       onPressed: () {
+        //         Navigator.of(context).push(
+        //             MaterialPageRoute(builder: (context) => MenuPrincipal()));
+        //       }),
+        //   label: "Listar Presenças",
+        // ),
         // BottomNavigationBarItem(
         //   icon: Icon(Icons.settings),
         //   label: 'Configurações',
