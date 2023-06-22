@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../data/perfil_entity.dart';
 import '../data/perfil_sqlite_datasource.dart';
+import 'bottom_navigation_bar.dart';
 import 'style.dart';
 
 class AddAluno extends StatefulWidget {
@@ -39,6 +40,7 @@ class _AddAluno extends State<AddAluno> {
     return MaterialApp(
       theme: style(),
       home: Scaffold(
+        bottomNavigationBar: Bottom_Navigation_Bar(),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Cadastro de Aluno'),

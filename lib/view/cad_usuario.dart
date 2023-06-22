@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_element, camel_case_types
 
 import 'package:chamada_univel/data/perfil_sqlite_datasource.dart';
+import 'package:chamada_univel/view/bottom_navigation_bar.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 

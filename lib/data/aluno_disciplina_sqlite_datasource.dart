@@ -95,7 +95,7 @@ class AlunoDisciplinaSQLiteDataSource {
         AlunoDisciplinaEntity aluno_disciplina = AlunoDisciplinaEntity();
         aluno_disciplina.aluno = new AlunoEntity();
         aluno_disciplina.disciplina = new DisciplinaEntity();
-
+        aluno_disciplina.falta = false;
         aluno_disciplina.aluno_disciplinaID = row['$ALUNODISCIPLINA_COLUMN_ID'];
         aluno_disciplina.aluno?.alunoID = row['$ALUNO_COLUMN_ID'];
         aluno_disciplina.aluno?.nome = row['$ALUNO_COLUMN_NOME'];

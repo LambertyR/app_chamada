@@ -8,7 +8,6 @@ import 'package:chamada_univel/view/bottom_navigation_bar.dart';
 import 'package:chamada_univel/view/style.dart';
 import 'package:flutter/material.dart';
 import 'menu_principal.dart';
-import 'menu_principal_copy.dart';
 
 class AddDisciplina extends StatelessWidget {
   const AddDisciplina({super.key});
@@ -21,7 +20,10 @@ class AddDisciplina extends StatelessWidget {
             title: const Text('Adicionar Disciplina'),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
+              onPressed: () =>
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return MenuPrincipal();
+              })),
             )),
         body: _AddDisciplina(),
         bottomNavigationBar: Bottom_Navigation_Bar(),
@@ -85,7 +87,7 @@ class _AddDisciplina extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: Text("Falha ao Adicionar Disciplina!"),
-                                content: Text("Verifique o usuário."),
+                                //content: Text("Verifique o usuário."),
                               );
                             });
                       }

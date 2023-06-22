@@ -8,6 +8,7 @@ class Conexao {
 
   static Future<Database> getConexaoDB() async {
     if (_database == null) {
+      DateTime data = DateTime.now();
       String databasesPath =
           join(await getDatabasesPath(), DATABASE_PRIMEIROAPP);
 
