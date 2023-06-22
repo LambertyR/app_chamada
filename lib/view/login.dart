@@ -58,7 +58,7 @@ class _Login extends State<Login> {
               width: 200,
               height: 200,
               child: Image.network(
-                  "https://static.vecteezy.com/ti/vetor-gratis/p1/5165306-cartao-cadeado-icone-cadeado-com-cartao-banco-vetor.jpg"),
+                  "https://img.freepik.com/vetores-premium/ilustracao-vetorial-de-lista-de-verificacao-de-design-de-icone-de-documento-3d_78434-182.jpg?w=2000"),
             ),
             Container(
               padding: const EdgeInsets.all(10),
@@ -148,87 +148,3 @@ class _Login extends State<Login> {
         ));
   }
 }
-
-
-
-
-// class Login extends StatelessWidget {
-//   String email = '';
-//   String pass = '';
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//         padding: const EdgeInsets.all(10),
-//         child: ListView(
-//           children: <Widget>[
-//             Container(
-//                 alignment: Alignment.center,
-//                 padding: const EdgeInsets.all(10),
-//                 child: const Text(
-//                   'Login',
-//                   style: TextStyle(
-//                       color: Colors.green,
-//                       fontWeight: FontWeight.w500,
-//                       fontSize: 30),
-//                 )),
-//             Container(
-//               padding: const EdgeInsets.all(10),
-//               // ignore: prefer_const_constructors
-//               child: TextField(
-//                 keyboardType: TextInputType.emailAddress,
-//                 decoration: const InputDecoration(
-//                   labelText: 'Login',
-//                 ),
-//               ),
-//             ),
-//             Container(
-//               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-//               child: TextField(
-//                 decoration: const InputDecoration(
-//                   labelText: 'Senha',
-//                 ),
-//               ),
-//             ),
-
-//             Container(
-//                 height: 50,
-//                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-//                 margin: const EdgeInsets.only(top: 20, bottom: 20),
-//                 child: ElevatedButton(
-//                   child: const Text('Login'),
-//                   onPressed: () {
-//                     Navigator.push(context,
-//                         MaterialPageRoute(builder: (context) {
-//                       return Menu_Principal();
-//                     }));
-//                   },
-//                 )),
-//             // ignore: sort_child_properties_last
-//             Row(children: <Widget>[
-//               TextButton(
-//                   child: const Text(
-//                     'Cadastrar',
-//                   ),
-//                   onPressed: () {
-//                     print('Cadastre aqui');
-//                     // Navigator.push(
-//                     //   context,
-//                     //   MaterialPageRoute(builder: (context) => Cadastro()),
-//                     // );
-//                   })
-//             ], mainAxisAlignment: MainAxisAlignment.center),
-//             TextButton(
-//               onPressed: () {
-//                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                   return Recuperar_Senha();
-//                 }));
-//               },
-//               child: const Text(
-//                 'Esqueci a senha',
-//               ),
-//             ),
-//           ],
-//         ));
-//   }
-// }
